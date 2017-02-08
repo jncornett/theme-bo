@@ -2,7 +2,13 @@ function _git_branch
   command git rev-parse --abbrev-ref HEAD
 end
 function _git_dirty
-  test -n (command git status -s -uno ^/dev/null)
+  set -l git_status (command git status -s -uno ^/dev/null)
+  if test $status -eq 0
+    if test -n $git_status
+      return 0
+    end
+  end
+  return 1
 end
 function fish_right_prompt
   set -l git_branch (_git_branch)
