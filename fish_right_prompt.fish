@@ -3,7 +3,7 @@ function _git_branch
 end
 function _git_dirty
   set -l git_status (command git status -s -uno ^/dev/null)
-  if test $status -eq 0
+  if test "$status" -eq 0
     if [ $git_status ]
       return 0
     end
@@ -12,12 +12,12 @@ function _git_dirty
 end
 function fish_right_prompt
   set -l exit_code $status
-  if test $exit_code -ne 0
+  if test "$exit_code" -ne 0
     echo -n (set_color ff6c5d red)'⏎ '
   end
   echo -n (set_color brblack)'('
   set -l git_branch (_git_branch)
-  if test $status -eq 0
+  if test "$status" -eq 0
     if _git_dirty
       echo -n (set_color ff6c5d red)
     else
