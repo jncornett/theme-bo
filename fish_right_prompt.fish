@@ -4,7 +4,7 @@ end
 function _git_dirty
   set -l git_status (command git status -s -uno ^/dev/null)
   if test $status -eq 0
-    if test -n $git_status
+    if [ $git_status ]
       return 0
     end
   end
